@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="layout(content)">
+<!-- Yha Conetent me data home page se ayga 
+concept of inheritence -->
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+
+<title th:text="${title}">Base HTML Page</title>
+<!--  model se jo string pass ki h wo aa jygi and "Base HTML Page" ko
+    replace ho jyga   -->
+</head>
+<body>
+
+	<!--this is Navbar start  -->
+	<nav  class=" fixed-top navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Smart Contact Manager</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">   -->
+			<ul class="navbar-nav mr-auto text-uppercase">
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="page" th:href="@{/home/}" href="#">Home</a></li>
+					
+				
+				
+	<li class="nav-item"><a class="nav-link" href="#"> <span th:text="${user.name}"></span> </a></li>
+				
+					<li class="nav-item"><a class="nav-link"th:href="@{/logout}" href="#">Logout</a></li>
+			</ul>
+		</div>
+		
+		
+		</div>
+	</nav>
+	<!-- ##### Navbar closed #####-->
+
+
+<!-- ##### This is sidebar #####-->
+  <div class="sidebar mt-2 ">
+  
+  <span onclick="toggleSidebar()" class="crossBtn"> &times;</span>
+  
+   <a href="#" th:href="@{/user/index}" class="item"> <i class="fas fa-home"></i> Home</a>
+   <a href="#"  th:href="@{/user/show-contacts/0}" class="item"> <i class="fa-solid fa-address-book"></i> View Contacts</a>
+   <a href="#" th:href="@{/user/add-contact}" class="item"><i class="fa-solid fa-address-card"></i> Add Contacts</a>
+   <a href="#" th:href="@{/user/profile}" class="item"><i class="fas fa-user-circle"></i> View Profile</a>
+   <a href="#" th:href="@{/user/settings}" class="item"> <i class="fa-solid fa-gear"></i> Settings</a>
+   <a href="#" th:href="@{/logout}" class="item"> <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </div>
+
+
+  <!-- ##### This is content which fetch from user_dashboard html #####-->
+  <div class="content mt-5">
+  
+   <i onclick="toggleSidebar()" class ="fas fa-bars m-3"></i>
+   
+   <!-- Message Box -->
+   <div th:if="${session.message}" class="container">
+    <div  th:classappend="${'alert-'+session.message.type }" class="alert text-center" role="alert">
+    <span th:text="${session.message.content}"></span>
+  <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+</div>
+
+<th:black th:text="${#session.removeAttribute('message')}"></th:black>
+   </div>
+  
+   <div th:replace="${content}"> </div>
+   
+    </div>
+	
+	<!-- Yha content variable  ka sara data aa jyga div me and ye content me data home page se ayga -->
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+	<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+	<script th:src="@{/js/script.js}"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	
+	<script>
+	
+	function deleteContact(cId)
+	{
+		swal({
+			  title: "Are you sure?",
+			  text: "Are You want to delete This contact !!",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			    window.location="/user/delete/"+cId; // ye redirevt hokr is URL ko hit krega and Iske liye apun me Handler to bna hi rkha h
+			    }
+			   else {
+			    swal("Your contact is safe!");
+			  }
+			});
+
+		
+	}
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<!--  yha normal ke andr base html page ka content inherit ho jyga and iske section me is page ke section ka content chla jyga 
+ ye conecpt inhertince of thyeleaf ka h jiske upr seperate vdio bni h   -->
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+</head>
+<body>
+	<section>
+  <div class="container">
+  
+  <div class="card">
+  	<div class="card-body mt-4">
+  	
+  	<div class="container text-center">
+  	  <img src="" style="height: 200px; width: 200px" class="my_profile_picture" th:src="@{'/img/user_dashboard.png'}" alt="profile photo" />
+        </div>
+        
+        <!-- Font italic not work here why ? -->
+        <h1 class="text-center mt-3 font-italic">
+        Start Adding your contact on Cloud
+        </h1>
+        
+        <div class="text-center mt-4">
+        <!-- btn block property did not work Why? -->
+        <a th:href="@{/user/add-contact}" class="btn btn-primary btn-block text-uppercase"> Add your contacts </a>
+        </div>
+         
+  	 </div>
+  </div>
+  
+  
+  </div>
+	
+	</section>
+
+
+</body>
+</html>

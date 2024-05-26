@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<!--  ye sara page replace
+ho jyga and iska section ka content replace hokr base html page me chla jyga and and whi page show hga tum title se dekh skte ho 
+jb progrm run krwaoge to base page ka title show hga and ye conecpt inhertince of thyeleaf ka h jiske upr seperate vdio bni h   -->
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+</head>
+<body>
+	<section>
+		   <div class="card ">
+		 <div class="card-body"> 
+		  <h1 class="text-center"> Update Contact Page </h1>
+		 
+		 <div class="container-fluid mt-1">
+		 <div class="row">
+		 
+		 <div class="col-md-8 offset-md-2"></div>
+		 
+<form action="#"  th:object="${contact}" enctype="multipart/form-data" method="POST" th:action="@{/user/process-update}" class="mt-2">
+
+<!--             ye Field vdio me bnani sikhai h but usme kuch problem aa ri thi to mne ye khd se net se kia h 
+               <div class="input-group">
+               
+               <div class="input-groupt-prepend">
+               <div class="input-group-text mr-3">
+               
+               <i class="fa fa-plus"></i>
+               
+               </div>
+               
+               </div>
+               <input type="text" id="firstname" name="name" placeholder="Enter Your Name" class="form-control" />
+               </div>
+  -->
+  
+  <input type="hidden"  th:value="${contact.cId}" name="cId"/> <!-- Yha hm apni id la rhe h is form pr jiska age use hga update krte time -->
+  
+  <!-- For Name -->
+               <div class="col-auto">
+    <label class="visually-hidden" for="autoSizingInputGroup">Enter Name</label>
+    <div class="input-group">
+      <div class="input-group-text">FN</div>
+      <input th:value="${contact.name}" required="required" type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+    </div>
+    </div>
+    
+    
+    <!-- For Second Name -->
+     <div class="col-auto mt-2">
+    <label class="visually-hidden" for="autoSizingInputGroup">Enter Second Name</label>
+    <div class="input-group">
+      <div class="input-group-text">SN</div>
+      <input th:value="${contact.secondName}" required="required" type="text" class="form-control" name="secondName" id="secondName" placeholder="Enter Second Name">
+    </div>
+  </div>
+  
+  <!-- For phone -->
+   <div class="col-auto mt-2">
+    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+    <div class="input-group">
+      <div class="input-group-text">NO</div>
+      <input th:value="${contact.phone}" required="required"  type="number" class="form-control" name="phone" id="phone" placeholder="Enter Phone No">
+    </div>
+  </div>
+  
+  
+  <!-- For Email -->
+   <div class="col-auto mt-2">
+    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+    <div class="input-group">
+      <div class="input-group-text">@</div>
+      <input th:value="${contact.email}" required="required" type="email" class="form-control" name="email" id="email" placeholder="Enter your mail">
+    </div>
+  </div>
+		 
+		 <!-- For Work -->
+		  <div class="col-auto mt-2">
+    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+    <div class="input-group">
+      <div class="input-group-text">@</div>
+      <input th:value="${contact.work}" required="required" type="text" class="form-control" name="work" id="work" placeholder="Profession">
+    </div>
+  </div>
+  
+  <!--  Contact Description -->
+  <div class="form-group mt-3">
+  <textarea th:text="${contact.description}" placeholder="Enter Conatct Description" name="description" id="description" class="form-control" rows="10"></textarea>
+  
+  </div>
+		 
+		 <div class="container text-center">
+		 
+		 <img style="width: 200px ; height:200px "  th:src="@{'/img/'+${contact.image}}" alt="" />
+		 </div>
+		 
+		 
+		 <!--  for Image -->
+		 <div class="custom-file mt-2 ">
+		 <input type="file" name="profileImage" />
+		 
+		 </div>
+		 
+		 
+		 <!-- Submit Botton -->
+		 
+		 <div class="container text-center">
+		 <button class="btn btn-outline-primary"> Save Contact</button>
+		 
+		 </div>
+		 </form>
+		 </div>
+		 
+		 </div>
+		 
+		 </div>
+		 
+		 </div>
+	
+	</section>
+
+
+</body>
+</html> 

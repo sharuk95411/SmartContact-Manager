@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<!--ye sara page replace ho jyga and is section ka content replace hokr base html page me chla jyga and and whi page show hga tum title se
+ dekh skte ho jb progrm run krwaoge to base page ka title show hga and ye concept inhertince of thyeleaf ka h jiske upr seperate vdio bni h -->
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+</head>
+<body>
+	<section>   
+
+	<div class="container">
+	<div class="row">
+	<div class="col-md-6 offset-md-3">
+	
+	<div class="my-card mt-7">  <!-- mt-2 mean m-margin t-top and -2 is value so margin from top 2 --> 
+	<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+	
+ <p  class="text-center" th:text="${session.message.content}"></p>
+ <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+</div>
+ 
+<div class="container text-center" >
+<img  style="width: 80px;"src="" th:src="@{/img/membership.png}" alt="" />
+</div>
+
+	<h1 class="text-center">Register Here !!</h1>
+	<!-- novalidate ye HTMl k validation ko htane k liye h ab only server side ka hi validation chlega
+			and agr isko hta dge to HTML ka b validation chlega ,try krke dekh skte ho -->
+	<form novalidate action="" th:action= "@{/do_register}" method="post" th:object="${user}"> 
+	
+	<!--th:object="${user}"> user variable h jo ki blank h pass
+kia h hme model class k through,ab isme niche data set kia ja rha h jha jha hum kr rhe h jo ki console pr print kra kr chck kr skte h -->
+	
+<!-- ===================================================Name Field=============================================================================== -->
+							<div class="form-group">
+								<label for="name_field" class="form-label">Your Name </label>
+									 <input name="name" type="text" class="form-control" 
+									 	th:classappend="${#fields.hasErrors('name') ?'is-invalid' :' '}" 
+									id="name_field" aria-describedby="emailHelp" placeholder="Enter Here" required 
+                                     th:value="${user.name}"  />
+<!-- th:value="${user.name}" Ye form submit krne k bad data usi feild me show krne k liye h and name="name" isse data user class k name 
+variable me show ho jyga jo tm console pr user ko print krke dekh skte ho  -->
+									
+								
+								<div th:each=" e: ${#fields.errors('name')}" th:text="${e}" class="invalid-feedback"> </div>
+							</div>
+							
+							
+							
+ <!-- =====================================================Email Field=========================================================================== -->
+           
+							<div class="form-group">
+								<label for="emai_field" class="form-label">Your Email  </label>
+									 <input name="email" type="email" class="form-control"
+									 th:classappend="${#fields.hasErrors('email') ?'is-invalid' :' '}"  
+									id="email_field" aria-describedby="emailHelp" placeholder="Enter Here"
+									required  th:value="${user.email}"   />
+									<div th:each=" e: ${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"> </div>
+									
+							</div>
+<!-- ====================================================Password Field==================================================================== -->
+							<div class="form-group">
+								<label for="password_field" class="form-label">Password </label> <input
+								name="password"
+									type="password" class="form-control"
+									 th:classappend="${#fields.hasErrors('password') ?'is-invalid' :' '}"  
+									 id="password_field"
+									aria-describedby="emailHelp" placeholder="Enter Here" required>
+<div th:each=" e: ${#fields.errors('password')}" th:text="${e}" class="invalid-feedback"> </div>
+							</div>
+							
+<!-- ==================================================== About Field======================================================================= -->
+							
+							 <div class="form-group mt-2">
+							 <textarea name="about" th:text="${user.about}" placeholder="Enter Something About yourself"  rows="5" class="form-control"></textarea>
+							 </div>
+							 
+							 
+<!-- ==================================================Terms and Conditions================================================================ -->
+						
+			
+						 <div class=" form-group form-check">
+                <input type="checkbox" name="exampleCheck1" class="form-check-input" id="exampleCheck1"/>
+                      <label for="exampleCheck1">Terms and Conditions !!!</label>
+                         </div>
+
+<!-- ===========================================================Buttons======================================================================= -->
+							 <div class="container text-center"> 
+							<button type="submit"  class="btn bg-primary text-white mt-2" >Submit</button>
+							<button type="reset"  class="btn btn-warning mt-2" >Reset</button>
+							 </div>
+						</form>
+	
+   </div>
+	</div>
+	</div>
+	</div>
+	
+	</section>
+
+
+</body>
+</html>

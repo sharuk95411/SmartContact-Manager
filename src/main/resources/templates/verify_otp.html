@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="base::layout(~{::section})">
+<!--  ye sara page replace
+ho jyga and iska section ka content replace hokr base html page me chla jyga and and whi page show hga tum title se dekh skte ho 
+jb progrm run krwaoge to base page ka title show hga and ye conecpt inhertince of thyeleaf ka h jiske upr seperate vdio bni h   -->
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+	<section>
+		<div id="login">
+			<div class="container">
+				<div id="login-row"
+					class="row justify-content-center align-items-center">
+					<div id="login-column" class="col-md-6">
+						<div id="login-box" class="col-md-12" style="height: 240px;">
+
+							<!--   Email Form -->
+
+							<div class="alert alert-success m-3 " role="alert">OTP send
+								to Successfully of your email</div>
+								
+								<!-- Message Box -->
+							<div th:if="${session.message}" class="container">
+								<div class="alert alert-danger my-2 text-center" role="alert">
+									<span th:text="${session.message}"></span>
+
+								</div>
+
+								<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+							</div>
+							<form method="post" action="" th:action="@{/verify-otp}">
+								<div class="form-group m-2">
+
+
+									<input name="otp" required="required" type="text"
+										placeholder="Enter OTP Here " class="form-control" />
+
+									<div class="container text-center mt-3">
+
+										<button class="btn btn-success mt-2">Verify OTP Here</button>
+									</div>
+
+								</div>
+
+
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+</body>
+</html>

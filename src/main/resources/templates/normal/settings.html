@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<!--  ye sara page replace
+ho jyga and iska section ka content replace hokr base html page me chla jyga and and whi page show hga tum title se dekh skte ho 
+jb progrm run krwaoge to base page ka title show hga and ye conecpt inhertince of thyeleaf ka h jiske upr seperate vdio bni h   -->
+<head>
+<meta charset="UTF-8" />
+
+<title>Setting Page</title>
+</head>
+<body>
+	<section>
+
+
+<div class="container">
+
+<div class="row">
+<div class="col-md-12">
+
+<div class="card">
+
+<div class="card-body">
+
+<h3 class="mb-3">Change Your Password </h3>
+
+<form th:action="@{/user/change-password}" method="post">
+
+  <!-- Old Password field -->
+  <div class="form-group">
+  
+   <input name="oldPassword" type="password" class="form-control" placeholder="Enter old Password" />
+  </div>
+
+<!-- New Password field -->
+  <div class="form-group">
+  
+   <input required="required" name="newPassword" type="password" class="form-control mt-3" placeholder="Enter New Password" />
+  </div>
+
+     <div class="container text-center">
+     
+     <button type="submit" class="btn btn-success mt-3">Change</button>
+     
+     <button type="reset" class="btn btn-warning mt-3">Reset</button>
+     </div>
+
+</form>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+	</section>
+
+
+</body>
+</html>

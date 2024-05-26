@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<!--  ye sara page replace
+ho jyga and iska section ka content replace hokr base html page me chla jyga and and whi page show hga tum title se dekh skte ho 
+jb progrm run krwaoge to base page ka title show hga and ye conecpt inhertince of thyeleaf ka h jiske upr seperate vdio bni h   -->
+<head>
+<meta charset="UTF-8" />
+<title>Home Page</title>
+</head>
+<body>
+	<section>
+	<div class="card mr-10"> <!-- Margin is not working i dont know why -->
+	
+	<div class="card-body">
+	
+	<h1 class="text-center"> Your Contacts</h1>
+	
+	<!-- Search -->
+	
+	<div class="search-continer my-4">
+	
+	<!-- ye search() method JS me bna h,hum jo b value enter krayge JS ka km ye hga wo is query or value ko lekr 
+	backend me jo search controller bnaya h usko hit kregi then wha se backend ka km start ho jyga -->
+	<!-- onkeyup ye ek predefined func h iske bre me google kr lena easy h -->
+	
+	<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search Your Contacts"/>
+	
+	<div class="search-result">
+	
+     <!-- Suggestion Shows Here  -->
+	</div>
+	</div> 
+   	
+	<div class="table-responsive">
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+       <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="c : ${contacts}">
+      <th  th:text=" ${'SCM2022'+c.cId}"scope="row">1</th> <!-- SCM ye smart contact manager h and is test ko id me append kia gya h -->
+      
+      <td> 
+     
+     <img src="" class="my_profile_picture" th:src="@{'/img/' + ${c.image}}" alt="profile photo" /> 
+      <span th:text="${c.name}"></span> </td> 
+      
+    
+      <td >
+      <a href="#"  th:href="@{'/user/'+ ${c.cId}+'/contact'}">
+       <span th:text="${c.email}">></span>
+      </a>
+      
+      </td>
+      <td th:text="${c.phone}" >@mdo</td>
+      <td>
+      <!-- th:onclick="|deleteContact(${c.cId})|" ye Java Script me fuction call kia gya h -->
+      
+      <a href="#" th:onclick="|deleteContact(${c.cId})|"  class="btn btn-danger btn-sm"> DELETE </a>
+      
+      <!-- Yha update ka form tag k andr isliye rkha gya h bcz ye POST type h  -->
+      
+      <form  method="Post" th:action="@{'/user/update-contact/'+${c.cId}}" class="mt-1">
+      
+           <button type="submit" class="btn btn-primary btn-sm"> UPDATE</button>
+      </form>
+     
+      
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+<!-- ===============================================Pagination=========================================================================  -->
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+  
+  <!-- th:if="${currentPage != 0}" ye first page pr ane pr previous show na kre uske liye h  -->
+  
+    <li   th:if="${currentPage != 0}" class="page-item"><a  th:href= "@{${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+    
+    
+    <!-- ${#number.sequence(1,totalPages)} ye loop chl rha h jiski wjh se total pages section me show hge  -->
+    <!-- th:classappend="${currentPage==i-1 ? 'active' : ' '}" ye hum jis page pr hte h wo niche count me dark ho jye uske liye h -->
+    <!-- th:href="@{'user/show-contacts'+${i-1} }" isse hm niche bar pr click krne pr kisi b apge pr ja skte h  -->
+    <li th:classappend="${currentPage==i-1 ? 'active' : ' '}"  th:each= "i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a  th:href="@{'/user/show-contacts/'+${i-1} }" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+    
+    
+    <!--th:if="${currentPage+1 != totalPages}" ye tb k liye h jab last page pr ane pr,Next show na kre  -->
+    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a  th:href="@{${currentPage+1}}" class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>
+	</div>
+	
+	</div>
+	
+	
+	</section>
+
+
+</body>
+</html>
